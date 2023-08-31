@@ -3,4 +3,17 @@
 }
 
 .bg-navbar {
+  background-color: #25a18e;
+}
+
+.style-button-association {
+  background-color: #fe9000;
+  border: transparent;
+  color: black;
+  font-weight: 500;
+}
+
+.style-button-association:hover {
+  background-color: rgb(0, 0, 0);
+  color: white;
 }
