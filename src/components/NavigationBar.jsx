@@ -5,8 +5,15 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import LogoSavePets from "../asset/img-grande.png";
 import "../Style/navbarStyle.css";
 import RegisterAssociationModal from "./Association/RegisterAssociationModal";
+import { useNavigate } from "react-router-dom";
 
 const NavigationBar = () => {
+  const navigate = useNavigate();
+
+  const redirectHomeOnClick = () => {
+    navigate("/");
+  };
+
   return (
     <Navbar expand="lg" className="bg-navbar">
       <Container>
@@ -20,7 +27,7 @@ const NavigationBar = () => {
             style={{ maxHeight: "100px" }}
             navbarScroll
           >
-            <Nav.Link href="#action1">Home</Nav.Link>
+            <Nav.Link onClick={redirectHomeOnClick}>Home</Nav.Link>
             <Nav.Link href="#action2">Link</Nav.Link>
             <NavDropdown title="Link" id="navbarScrollingDropdown">
               <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
