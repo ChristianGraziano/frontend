@@ -6,6 +6,10 @@ import LogoSavePets from "../asset/img-grande.png";
 import "../Style/navbarStyle.css";
 import RegisterAssociationModal from "./Association/RegisterAssociationModal";
 import { useNavigate } from "react-router-dom";
+import Button from "react-bootstrap/esm/Button";
+import { Link } from "react-router-dom";
+import { useSession } from "../middlewares/ProtectedRoutes";
+import { AiOutlineLogout } from "react-icons/ai";
 
 const NavigationBar = () => {
   const navigate = useNavigate();
@@ -14,6 +18,13 @@ const NavigationBar = () => {
     navigate("/");
   };
 
+  const handleLogout = () => {
+    localStorage.clear(); // Svuota il Local Storage
+    navigate("/login"); // Reindirizza alla pagina di login o ad altra destinazione
+  };
+
+  const session = useSession();
+  console.log(session);
   return (
     <Navbar expand="lg" className="bg-navbar">
       <Container>
@@ -44,7 +55,24 @@ const NavigationBar = () => {
             </Nav.Link>
           </Nav>
 
-          <RegisterAssociationModal />
+          {session ? (
+            <div className="d-flex align-items-center">
+              <span className="fw-bold">{session.name}</span>
+              <img src={session.logo} alt="" className="img-userLogged" />
+              <Button variant="link" onClick={handleLogout} className="fs-2">
+                <AiOutlineLogout />
+              </Button>
+            </div>
+          ) : (
+            <>
+              <RegisterAssociationModal />
+              <Link to={"/login"}>
+                <Button className="ms-2" variant="dark">
+                  Login
+                </Button>
+              </Link>
+            </>
+          )}
         </Navbar.Collapse>
       </Container>
     </Navbar>

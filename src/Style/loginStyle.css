@@ -1,0 +1,34 @@
+.div_login {
+  height: 100vh;
+  background-image: url(../asset/backgroundLogin.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.div_form {
+  height: 80vh;
+}
+
+.div_white {
+  border-radius: 10%;
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button_login {
+  width: 8rem;
+  margin: auto;
+}
+
+.icon-github {
+  font-size: 1.5rem;
+}
+
+.input_style {
+  background-color: rgb(250, 250, 250);
+  text-align: center;
+  color: black;
+}
