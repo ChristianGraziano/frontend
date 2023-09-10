@@ -9,18 +9,14 @@ import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/esm/Button";
 import { Link } from "react-router-dom";
 import { useSession } from "../middlewares/ProtectedRoutes";
-import { AiOutlineLogout } from "react-icons/ai";
+import { Dropdown } from "react-bootstrap";
+import LogoutModal from "./LogoutModal";
 
 const NavigationBar = () => {
   const navigate = useNavigate();
 
   const redirectHomeOnClick = () => {
     navigate("/");
-  };
-
-  const handleLogout = () => {
-    localStorage.clear(); // Svuota il Local Storage
-    navigate("/login"); // Reindirizza alla pagina di login o ad altra destinazione
   };
 
   const session = useSession();
@@ -58,10 +54,24 @@ const NavigationBar = () => {
           {session ? (
             <div className="d-flex align-items-center">
               <span className="fw-bold">{session.name}</span>
-              <img src={session.logo} alt="" className="img-userLogged" />
-              <Button variant="link" onClick={handleLogout} className="fs-2">
-                <AiOutlineLogout />
-              </Button>
+
+              <Dropdown>
+                <Dropdown.Toggle className="style-dropdown-user">
+                  {" "}
+                  <img src={session.logo} alt="" className="img-userLogged" />
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu>
+                  <Dropdown.Item href="#/action-1">
+                    <Link to={"/dashboard"} className="style-linkDashboard">
+                      Dashboard
+                    </Link>
+                  </Dropdown.Item>
+                  <Dropdown.Item href="#/action-2">
+                    <LogoutModal />
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
             </div>
           ) : (
             <>

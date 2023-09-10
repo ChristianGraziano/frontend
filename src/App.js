@@ -4,6 +4,7 @@ import Homepage from "./Pages/Homepage";
 import ErrorPage from "./Pages/ErrorPage";
 import Login from "./Pages/Login";
 import ProtectedRoutes from "./middlewares/ProtectedRoutes";
+import DashBoard from "./Pages/DashBoard";
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
 
         <Route element={<ProtectedRoutes />}></Route>
+        <Route path="/dashboard" element={<DashBoard />} />
 
         <Route path="*" element={<ErrorPage />} />
       </Routes>

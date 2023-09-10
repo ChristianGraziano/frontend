@@ -27,3 +27,18 @@
 .icona-logout {
   color: black;
 }
+
+.style-dropdown-user {
+  background-color: transparent;
+  border: 0;
+  padding: 0;
+}
+
+.style-dropdown-user:hover {
+  border: black;
+  background-color: transparent;
+}
+
+.style-linkDashboard {
+  text-decoration: none;
+}

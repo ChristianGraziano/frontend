@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { AiFillGithub } from "react-icons/ai";
 import "../Style/loginStyle.css";
+import { toast } from "react-toastify";
+import OrmeImg from "../asset/orme.png";
+import { AiOutlineHome } from "react-icons/ai";
 
 const Login = () => {
   const [loginFormData, setLoginFormData] = useState({});
@@ -17,26 +20,59 @@ const Login = () => {
         "http://localhost:5050/login",
         loginFormData
       );
+
+      toast.success(" Login Effettuato Con Successo!!👍 ", {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+
       if (res.data.token) {
         localStorage.setItem("userLoggedIn", JSON.stringify(res.data.token));
         navigate("/");
       }
     } catch (error) {
       console.log(error);
+      toast.error("❌ Email o password non valide!", {
+        position: "top-right",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
     }
   };
 
+  const redirectHomeOnClick = () => {
+    navigate("/");
+  };
   return (
     <>
-      {" "}
       <div className="div_login">
-        <section className="d-flex justify-content-center pt-5 ">
-          <p>
-            Buongiorno ti presentiamo Save Pets e speriamo di riuscire nel
-            vostro obbiettivo di aumentare l'adozione e la visibilità della
-            vostra associazione, effettua il login ed accedi ai servizi.
-          </p>
-        </section>
+        <AiOutlineHome
+          onClick={redirectHomeOnClick}
+          className=" m-5 fs-2 home-button"
+        />
+        <Container>
+          <section className="fade-in-element">
+            <p className="pt-5 text-center fs-4 font-style-login ">
+              Buongiorno ti presentiamo Save Pets e speriamo di riuscire nel
+              vostro obbiettivo di aumentare l'adozione e la visibilità della
+              vostra associazione, effettua il login ed accedi ai servizi.
+            </p>
+            <div className="d-flex justify-content-center">
+              <img src={OrmeImg} alt="img orme cane" className="img-orme" />
+            </div>
+          </section>
+        </Container>
 
         <Container>
           <Row>

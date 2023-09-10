@@ -41,7 +41,7 @@ const RegisterAssociationModal = () => {
     dispatch(associationPost(data));
 
     toast.success(
-      "Registrazione Effettuata con Successo! Ritorna alla Homepage ed Effettua il Login.",
+      "Registrazione Effettuata con Successo! 👌 Ritorna alla Homepage ed Effettua il Login.",
       {
         position: "top-right", // Posizione del toast
         autoClose: 3000, // Durata in millisecondi
