@@ -49,6 +49,7 @@ const RegisterAssociationModal = () => {
         closeOnClick: true, // Chiudi il toast al click
         pauseOnHover: true, // Metti in pausa al passaggio del mouse
         draggable: true, // Spostabile
+        theme: "dark",
       }
     );
   };
@@ -65,7 +66,7 @@ const RegisterAssociationModal = () => {
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Registration Form Association</Modal.Title>
+          <Modal.Title>Registration Form New Association</Modal.Title>
         </Modal.Header>
         <Modal.Body className="d-flex flex-column align-items-center">
           <Form>
@@ -76,11 +77,7 @@ const RegisterAssociationModal = () => {
 
             <Form.Group className="mb-3" controlId="formGroupRegion">
               <Form.Label>REGION</Form.Label>
-              <Form.Control
-                type="input"
-                ref={region}
-                placeholder="Second Name"
-              />
+              <Form.Control type="input" ref={region} placeholder="Region" />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formGroupAddress">
@@ -88,7 +85,7 @@ const RegisterAssociationModal = () => {
               <Form.Control
                 type="input"
                 ref={address}
-                placeholder="Enter email"
+                placeholder="Enter Address"
               />
             </Form.Group>
 
@@ -97,7 +94,7 @@ const RegisterAssociationModal = () => {
               <Form.Control
                 type="password"
                 ref={password}
-                placeholder="Enter your birthdate"
+                placeholder="Enter your password"
               />
             </Form.Group>
 
@@ -116,12 +113,16 @@ const RegisterAssociationModal = () => {
 
             <Form.Group className="mb-3" controlId="formGroupDescription">
               <Form.Label>DESCRIPTION ASSOCIATION</Form.Label>
-              <Form.Control type="text" ref={description} placeholder="Name" />
+              <Form.Control
+                type="text"
+                ref={description}
+                placeholder="description association"
+              />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formGroupPiva">
               <Form.Label>pIva</Form.Label>
-              <Form.Control type="input" ref={pIva} placeholder="Name" />
+              <Form.Control type="input" ref={pIva} placeholder="pIva" />
             </Form.Group>
 
             <div className="text-center">

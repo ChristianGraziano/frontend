@@ -1,0 +1,8 @@
+.style-logo-card {
+  width: 4rem;
+}
+
+.hover-specialShadow:hover {
+  -webkit-box-shadow: -6px 4px 13px 3px rgba(37, 161, 142, 0.83);
+  box-shadow: -6px 4px 13px 3px rgba(37, 161, 142, 0.83);
+}

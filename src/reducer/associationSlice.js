@@ -8,6 +8,7 @@ const initialState = {
   associationsArray: [],
   association: null,
   status: "idle",
+  singleAssociation: {},
 };
 
 const associationSlice = createSlice({
@@ -53,6 +54,17 @@ const associationSlice = createSlice({
         state.associationsArray = state.associationsArray.filter(
           (association) => association._id !== action.payload
         );
+      })
+      //Chiamata per cercare associazione tramite ID
+      .addCase(associationById.fulfilled, (state, action) => {
+        state.singleAssociation = action.payload;
+      })
+      .addCase(associationById.pending, (state, action) => {
+        state.status = "loading";
+      })
+
+      .addCase(associationById.rejected, (state, action) => {
+        state.status = "error";
       });
   },
 });
@@ -67,7 +79,7 @@ export const associationPost = createAsyncThunk(
     form.append("password", association.password);
     form.append("email", association.email);
     form.append("logo", association.logo);
-    form.append("descriptio", association.description);
+    form.append("description", association.description);
     form.append("pIva", association.pIva);
 
     try {
@@ -106,9 +118,27 @@ export const deleteAssociation = createAsyncThunk(
   "associations/Delete",
   async (associationId) => {
     try {
-      const res = await axios.delete(`${endpoint}/authors/${associationId}`);
+      const res = await axios.delete(
+        `${endpoint}/associations/${associationId}`
+      );
       return res.data.associations;
       console.log(res.data.associations);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+export const associationById = createAsyncThunk(
+  "association/getById",
+  async (id) => {
+    try {
+      const res = await axios.get(`${endpoint}/associations/` + id);
+      if (!res) {
+        console.log(`HTTP error! status: ${res.status}`);
+      }
+      console.log(res.data);
+      return res.data;
     } catch (error) {
       console.log(error);
     }

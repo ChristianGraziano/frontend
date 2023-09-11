@@ -22,7 +22,7 @@ const NavigationBar = () => {
   const session = useSession();
   console.log(session);
   return (
-    <Navbar expand="lg" className="bg-navbar">
+    <Navbar expand="lg" className="bg-navbar" sticky="top">
       <Container>
         <Navbar.Brand href="#">
           <img className="logo-style" src={LogoSavePets} alt="Logo" />
