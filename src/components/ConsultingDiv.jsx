@@ -12,7 +12,7 @@ const ConsultingDiv = () => {
           md={8}
           sm={12}
           xs={12}
-          className="d-flex flex-column align-items-start justify-content-center fs-2 rounded style-consulting"
+          className="d-flex flex-column align-items-start justify-content-center fs-2 rounded style-consulting ps-5"
         >
           <p>
             Affidati agli esperti di Save Pets per scegliere il pet più adatto

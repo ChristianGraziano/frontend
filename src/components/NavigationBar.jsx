@@ -35,7 +35,7 @@ const NavigationBar = () => {
             navbarScroll
           >
             <Nav.Link onClick={redirectHomeOnClick}>Home</Nav.Link>
-            <Nav.Link href="#action2">Link</Nav.Link>
+            <Nav.Link href="#action2">Cerca Pet</Nav.Link>
             <NavDropdown title="Link" id="navbarScrollingDropdown">
               <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
               <NavDropdown.Item href="#action4">

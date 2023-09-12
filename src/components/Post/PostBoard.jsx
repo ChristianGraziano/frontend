@@ -36,7 +36,7 @@ const PostBoard = () => {
         <Form className="d-flex" onSubmit={filteredResult}>
           <Form.Control
             type="search"
-            placeholder="Search for a region"
+            placeholder="Search region.."
             className="me-2 rounded-pill shadow fs-4 p-2"
             aria-label="Search"
             onChange={handleSearch}

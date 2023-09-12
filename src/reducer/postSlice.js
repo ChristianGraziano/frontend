@@ -8,6 +8,7 @@ const initialState = {
   postsArray: [],
   status: "idle",
   singlePost: {},
+  postByIdAssociation: [],
 };
 
 const postSlice = createSlice({
@@ -59,6 +60,16 @@ const postSlice = createSlice({
       })
 
       .addCase(adoptionPostById.rejected, (state, action) => {
+        state.status = "error";
+      })
+      //chiamata GET filtro AssociationID
+      .addCase(postByAssociationId.fulfilled, (state, action) => {
+        state.postByIdAssociation = action.payload;
+      })
+      .addCase(postByAssociationId.pending, (state, action) => {
+        state.status = "pending";
+      })
+      .addCase(postByAssociationId.rejected, (state, action) => {
         state.status = "error";
       });
   },
@@ -139,6 +150,25 @@ export const adoptionPostById = createAsyncThunk(
       }
       console.log(res.data);
       return res.data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+//Chiamata per cercare i post in base all'associazione creatrice
+export const postByAssociationId = createAsyncThunk(
+  "postByAssociation/GET",
+  async (AssociationId) => {
+    try {
+      const res = await axios.get(
+        `${endpoint}/posts/association/${AssociationId}`
+      );
+      if (!res) {
+        console.log(`HTTP error! status: ${res.status}`);
+      }
+      console.log(res.data.post);
+      return res.data.post;
     } catch (error) {
       console.log(error);
     }

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { associationById } from "../reducer/associationSlice";
+import { postByAssociationId } from "../reducer/postSlice";
 import { nanoid } from "@reduxjs/toolkit";
 import SpinnerLoading from "../components/SpinnerLoading";
 import NavigationBar from "../components/NavigationBar";
@@ -10,11 +10,20 @@ import { useSession } from "../middlewares/ProtectedRoutes";
 import { AiOutlineHome } from "react-icons/ai";
 import { AiOutlineMail } from "react-icons/ai";
 import NewPostModal from "../components/Post/NewPostModal";
+import SinglePostDashboard from "../components/Association/SInglePostDashboard";
 
 const DashBoard = () => {
   const session = useSession();
   console.log(session);
+  const dispatch = useDispatch();
+  const ArrayPostById = useSelector(
+    (state) => state.adoptionPosts.postByIdAssociation
+  );
 
+  useEffect(() => {
+    dispatch(postByAssociationId(session.id));
+  }, [dispatch, session.id]);
+  console.log(postByAssociationId(session.id));
   return (
     <>
       <NavigationBar />
@@ -43,6 +52,12 @@ const DashBoard = () => {
           <Col lg={6} md={6} sm={12} xs={12}>
             <h2>Pet di {session.name}</h2>
             <NewPostModal />
+            <Row>
+              {ArrayPostById &&
+                ArrayPostById.map((post) => {
+                  return <SinglePostDashboard key={nanoid()} post={post} />;
+                })}
+            </Row>
           </Col>
         </Row>
       </Container>
