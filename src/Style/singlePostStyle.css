@@ -1,8 +1,22 @@
 .style-logo-card {
-  width: 4rem;
+  width: 2rem;
+  height: 2rem;
 }
 
 .hover-specialShadow:hover {
   -webkit-box-shadow: -6px 4px 13px 3px rgba(37, 161, 142, 0.83);
   box-shadow: -6px 4px 13px 3px rgba(37, 161, 142, 0.83);
+}
+
+.fade-in-element {
+  animation: fade-in 0.3s ease-in-out;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.5;
+  }
 }

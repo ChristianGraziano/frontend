@@ -5,6 +5,7 @@ import ErrorPage from "./Pages/ErrorPage";
 import Login from "./Pages/Login";
 import ProtectedRoutes from "./middlewares/ProtectedRoutes";
 import DashBoard from "./Pages/DashBoard";
+import PostDetails from "./Pages/PostDetails";
 
 const App = () => {
   return (
@@ -12,6 +13,7 @@ const App = () => {
       <Routes>
         <Route exact path="/" element={<Homepage />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/postDetails" element={<PostDetails />} />
 
         <Route element={<ProtectedRoutes />}></Route>
         <Route path="/dashboard" element={<DashBoard />} />

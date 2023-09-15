@@ -50,7 +50,7 @@ const DashBoard = () => {
           </Col>
 
           <Col lg={6} md={6} sm={12} xs={12}>
-            <h2>Pet di {session.name}</h2>
+            <h2>Pet {session.name}</h2>
             <NewPostModal />
             <Row>
               {ArrayPostById &&

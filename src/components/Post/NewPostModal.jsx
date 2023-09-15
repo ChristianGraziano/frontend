@@ -3,7 +3,11 @@ import { useState, useRef } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import jwtDecode from "jwt-decode";
-import { postAdoptionPosts } from "../../reducer/postSlice";
+import {
+  postAdoptionPosts,
+  postByAssociationId,
+} from "../../reducer/postSlice";
+import { toast } from "react-toastify";
 
 const NewPostModal = () => {
   const dispatch = useDispatch();
@@ -36,10 +40,13 @@ const NewPostModal = () => {
         association: associationId,
         content: content.current.value,
       };
-
-      dispatch(postAdoptionPosts(postPayload)).then(() => {
+      try {
+        await dispatch(postAdoptionPosts(postPayload));
         handleClose();
-      });
+        dispatch(postByAssociationId(associationId));
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
@@ -51,7 +58,7 @@ const NewPostModal = () => {
 
   return (
     <>
-      <Button variant="warning" onClick={handleShow}>
+      <Button variant="warning" onClick={handleShow} className="my-3">
         Add New Post
       </Button>
 

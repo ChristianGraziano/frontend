@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAdoptionPost, filterPosts } from "../../reducer/postSlice";
 import { LiaSearchLocationSolid } from "react-icons/lia";
 import SinglePost from "./SinglePost";
+import PaginationElement from "../PaginationElement";
 
 const PostBoard = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -57,6 +58,7 @@ const PostBoard = () => {
               return <SinglePost key={nanoid()} post={post} />;
             })}
         </Row>
+        <PaginationElement />
       </Container>
     </>
   );

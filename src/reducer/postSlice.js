@@ -71,6 +71,17 @@ const postSlice = createSlice({
       })
       .addCase(postByAssociationId.rejected, (state, action) => {
         state.status = "error";
+      })
+      //Chiamata PATCH per modificare un post
+      .addCase(patchAdoptionPost.fulfilled, (state, action) => {
+        state.singlePost = action.payload;
+      })
+      .addCase(patchAdoptionPost.pending, (state, action) => {
+        state.status = "loading";
+      })
+
+      .addCase(patchAdoptionPost.rejected, (state, action) => {
+        state.status = "error";
       });
   },
 });
@@ -132,8 +143,8 @@ export const deleteAdoptionPost = createAsyncThunk(
   "adoptionPost/Delete",
   async (postId) => {
     try {
-      const res = await axios.delete(`${endpoint}/${postId}`);
-      return res.data.posts;
+      const res = await axios.delete(`${endpoint}/posts/${postId}`);
+      return res.data.post;
     } catch (error) {
       console.log(error);
     }
@@ -175,5 +186,21 @@ export const postByAssociationId = createAsyncThunk(
   }
 );
 
+//Chiamata PATCH per modificare un post
+export const patchAdoptionPost = createAsyncThunk(
+  "adoptionPost/PATCH",
+  async ({ postId, dataToUpdate }) => {
+    try {
+      const res = await axios.patch(
+        `${endpoint}/posts/change/${postId}`,
+        dataToUpdate
+      );
+      return res.data.post;
+      console.log(res.data.post);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
 export const { filterPosts } = postSlice.actions;
 export default postSlice.reducer;
