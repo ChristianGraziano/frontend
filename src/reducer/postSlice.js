@@ -125,14 +125,16 @@ export const postAdoptionPosts = createAsyncThunk(
 
 export const getAdoptionPost = createAsyncThunk(
   "adoptionPost/GET",
-  async () => {
+  async ({ page, pageSize }) => {
     try {
-      const res = await axios.get(`${endpoint}/posts`);
+      const res = await axios.get(
+        `${endpoint}/posts?page=${page}&pageSize=${pageSize}`
+      );
       if (!res) {
         console.log(`HTTP error! status: ${res.status}`);
       }
-      console.log(res.data.post);
-      return res.data.post;
+      console.log(res.data);
+      return res.data;
     } catch (error) {
       console.log(error);
     }
@@ -155,11 +157,11 @@ export const adoptionPostById = createAsyncThunk(
   "adoptionPosts/getById",
   async (id) => {
     try {
-      const res = await axios.get(`${endpoint}/posts/` + id);
+      const res = await axios.get(`${endpoint}/posts/${id}`);
       if (!res) {
         console.log(`HTTP error! status: ${res.status}`);
       }
-      console.log(res.data);
+      console.log("API POST ID", res.data);
       return res.data;
     } catch (error) {
       console.log(error);
@@ -202,5 +204,6 @@ export const patchAdoptionPost = createAsyncThunk(
     }
   }
 );
+
 export const { filterPosts } = postSlice.actions;
 export default postSlice.reducer;

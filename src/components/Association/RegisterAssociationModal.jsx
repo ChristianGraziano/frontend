@@ -61,7 +61,7 @@ const RegisterAssociationModal = () => {
         className=" style-button-association shadow "
         onClick={handleShow}
       >
-        Are you an Association? Sign in
+        Sei un Azienda?
       </Button>
 
       <Modal show={show} onHide={handleClose}>

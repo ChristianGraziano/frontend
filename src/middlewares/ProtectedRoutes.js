@@ -9,7 +9,7 @@ const auth = () => {
 
 export const useSession = () => {
   const session = auth();
-  console.log(session);
+
   const decodedSession = session ? jwtDecode(session) : null;
 
   const navigate = useNavigate();

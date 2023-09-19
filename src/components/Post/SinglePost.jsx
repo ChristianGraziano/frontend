@@ -12,7 +12,7 @@ const SinglePost = ({ post }) => {
   return (
     <Col lg={3} md={4} sm={12} xs={12} className="fade-in-element">
       <Card className="w-100 mb-4 shadow hover-specialShadow ">
-        <Link to={"/postDetails"}>
+        <Link to={`/postDetails/${post._id}`}>
           <Card.Img variant="top" src={post.image} />
         </Link>
 

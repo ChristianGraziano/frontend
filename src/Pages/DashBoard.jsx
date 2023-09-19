@@ -11,6 +11,11 @@ import { AiOutlineHome } from "react-icons/ai";
 import { AiOutlineMail } from "react-icons/ai";
 import NewPostModal from "../components/Post/NewPostModal";
 import SinglePostDashboard from "../components/Association/SInglePostDashboard";
+import {
+  fetchReviewsByAssociation,
+  associationsReviews,
+} from "../reducer/reviewsSlice";
+import SingleReviews from "../components/Reviews/SingleReviews";
 
 const DashBoard = () => {
   const session = useSession();
@@ -19,11 +24,14 @@ const DashBoard = () => {
   const ArrayPostById = useSelector(
     (state) => state.adoptionPosts.postByIdAssociation
   );
+  const reviewsAssociation = useSelector(associationsReviews);
+  console.log(reviewsAssociation);
 
   useEffect(() => {
     dispatch(postByAssociationId(session.id));
+    dispatch(fetchReviewsByAssociation(session.id));
   }, [dispatch, session.id]);
-  console.log(postByAssociationId(session.id));
+
   return (
     <>
       <NavigationBar />
@@ -47,14 +55,27 @@ const DashBoard = () => {
                 </Card.Text>
               </Card.Body>
             </Card>
+            <div className="text-center fs-3 fst-italic mt-5 mb-2">Reviews</div>
+            {reviewsAssociation ? (
+              <section>
+                {reviewsAssociation &&
+                  reviewsAssociation.reviewsAssociation?.map((reviews) => (
+                    <SingleReviews reviews={reviews} key={nanoid()} />
+                  ))}
+              </section>
+            ) : (
+              <div className="my-5 d-flex justify-content-center align-items-center">
+                <SpinnerLoading />
+              </div>
+            )}
           </Col>
 
           <Col lg={6} md={6} sm={12} xs={12}>
-            <h2>Pet {session.name}</h2>
+            <h2 className="fst-italic">Pet {session.name}</h2>
             <NewPostModal />
             <Row>
               {ArrayPostById &&
-                ArrayPostById.map((post) => {
+                ArrayPostById?.map((post) => {
                   return <SinglePostDashboard key={nanoid()} post={post} />;
                 })}
             </Row>

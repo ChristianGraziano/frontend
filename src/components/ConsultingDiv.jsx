@@ -12,13 +12,13 @@ const ConsultingDiv = () => {
           md={8}
           sm={12}
           xs={12}
-          className="d-flex flex-column align-items-start justify-content-center fs-2 rounded style-consulting ps-5"
+          className="d-flex flex-column align-items-center justify-content-center fs-2 rounded style-consulting "
         >
-          <p>
+          <div className="text-center">
             Affidati agli esperti di Save Pets per scegliere il pet più adatto
             alle tue esigenze!
-          </p>
-          <Button className="style-consultingButton rounded-pill mt-2">
+          </div>
+          <Button className="style-consultingButton rounded-pill mt-2 m-3">
             Prenota Una Consulenza
           </Button>
         </Col>

@@ -94,42 +94,49 @@ const PatchPostModal = ({ post }) => {
               className="my-1"
               ref={typeAnimal}
               defaultValue={post.typeAnimal}
+              placeholder="Type Animal"
             />
             <Form.Control
               type="input"
               className="my-1"
               ref={name}
               defaultValue={post.name}
+              placeholder="Name"
             />
             <Form.Control
               type="input"
               className="my-1"
               ref={age}
               defaultValue={post.age}
+              placeholder="Age"
             />
             <Form.Control
               type="input"
               className="my-1"
               ref={gender}
               defaultValue={post.gender}
+              placeholder="Gender"
             />
             <Form.Control
               type="input"
               className="my-1"
               ref={dimension}
               defaultValue={post.dimension}
+              placeholder="Dimension"
             />
             <Form.Control
               type="input"
               className="my-1"
               ref={location}
               defaultValue={post.location}
+              placeholder="Location"
             />
             <Form.Control
               type="input"
               className="my-1"
               ref={city}
               defaultValue={post.city}
+              placeholder="City"
             />
             <Form.Control type="file" className="my-1" ref={image} />
             <Form.Control
@@ -137,6 +144,7 @@ const PatchPostModal = ({ post }) => {
               className="my-1"
               ref={content}
               defaultValue={post.content}
+              placeholder="Content"
             />
             <Modal.Footer>
               <Button variant="secondary" onClick={handleClose}>

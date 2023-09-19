@@ -5,13 +5,20 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAdoptionPost, filterPosts } from "../../reducer/postSlice";
 import { LiaSearchLocationSolid } from "react-icons/lia";
 import SinglePost from "./SinglePost";
-import PaginationElement from "../PaginationElement";
+import ResponsivePagination from "react-responsive-pagination";
+import "react-responsive-pagination/themes/classic.css";
 
 const PostBoard = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const dispatch = useDispatch();
   const { postsArray } = useSelector((state) => state.adoptionPosts);
-  console.log(postsArray);
+  console.log("PAGINATION", postsArray);
+  const [actualPage, setActualPage] = useState(1);
+
+  const changePage = (value) => {
+    setActualPage(value);
+    console.log(value);
+  };
 
   const handleSearch = (e) => {
     const { value } = e.target;
@@ -28,8 +35,8 @@ const PostBoard = () => {
   };
 
   useEffect(() => {
-    dispatch(getAdoptionPost());
-  }, []);
+    dispatch(getAdoptionPost({ page: actualPage, pageSize: 8 }));
+  }, [actualPage, dispatch]);
 
   return (
     <>
@@ -51,14 +58,18 @@ const PostBoard = () => {
           </Button>
         </Form>
       </Container>
-      <Container className="my-5">
+      <Container className="my-5 pt-5">
         <Row>
           {postsArray &&
-            postsArray.map((post) => {
+            postsArray.post?.map((post) => {
               return <SinglePost key={nanoid()} post={post} />;
             })}
         </Row>
-        <PaginationElement />
+        <ResponsivePagination
+          current={actualPage}
+          total={postsArray && postsArray.totalPages}
+          onPageChange={changePage}
+        />
       </Container>
     </>
   );
