@@ -1,0 +1,9 @@
+.custom-scroll {
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.custom-scroll-reviews {
+  max-height: 50vh;
+  overflow-y: auto;
+}

@@ -16,6 +16,7 @@ import {
   associationsReviews,
 } from "../reducer/reviewsSlice";
 import SingleReviews from "../components/Reviews/SingleReviews";
+import "../Style/dashboard.css";
 
 const DashBoard = () => {
   const session = useSession();
@@ -55,7 +56,9 @@ const DashBoard = () => {
                 </Card.Text>
               </Card.Body>
             </Card>
-            <div className="text-center fs-3 fst-italic mt-5 mb-2">Reviews</div>
+            <div className="text-center fs-3 fst-italic mt-5 mb-2 custom-scroll-reviews">
+              Reviews
+            </div>
             {reviewsAssociation ? (
               <section>
                 {reviewsAssociation &&
@@ -73,7 +76,7 @@ const DashBoard = () => {
           <Col lg={6} md={6} sm={12} xs={12}>
             <h2 className="fst-italic">Pet {session.name}</h2>
             <NewPostModal />
-            <Row>
+            <Row className="custom-scroll">
               {ArrayPostById &&
                 ArrayPostById?.map((post) => {
                   return <SinglePostDashboard key={nanoid()} post={post} />;

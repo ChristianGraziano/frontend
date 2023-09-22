@@ -36,7 +36,7 @@ const PostBoard = () => {
 
   useEffect(() => {
     dispatch(getAdoptionPost({ page: actualPage, pageSize: 8 }));
-  }, [actualPage, dispatch]);
+  }, [actualPage]);
 
   return (
     <>

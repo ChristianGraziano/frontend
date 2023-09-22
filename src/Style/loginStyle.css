@@ -1,30 +1,13 @@
 .div_login {
-  height: 100vh;
   background-image: url(../asset/backgroundLogin.png);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
 }
 
-.div_form {
-  height: 40vh;
-}
-
-.div_white {
-  border-radius: 10%;
-  flex-direction: column;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .button_login {
   width: 8rem;
   margin: auto;
-}
-
-.icon-github {
-  font-size: 1.5rem;
 }
 
 .input_style {
@@ -54,5 +37,54 @@
   }
   to {
     opacity: 1.5;
+  }
+}
+
+.MainContainer {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url(../asset/backgroundLogin.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+@keyframes slide-in-from-left {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.slide-in {
+  animation: slide-in-from-left 1.5s forwards;
+}
+
+.hoverZoom:hover {
+  transform: scale(1.2);
+  transition: 0.7s;
+}
+
+.p-login {
+  line-height: 2.7rem;
+  font-style: italic;
+}
+
+.fade-in-element {
+  animation: fade-in 0.3s ease-in-out;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }

@@ -54,6 +54,7 @@ const postSlice = createSlice({
       //Chiamata per cercare un post ID
       .addCase(adoptionPostById.fulfilled, (state, action) => {
         state.singlePost = action.payload;
+        console.log(state.singlePost);
       })
       .addCase(adoptionPostById.pending, (state, action) => {
         state.status = "loading";

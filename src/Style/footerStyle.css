@@ -1,0 +1,24 @@
+.logo-footer {
+  width: 8rem;
+}
+.ul-style {
+  list-style: none;
+  line-height: 2rem;
+}
+.ul-style > li:hover {
+  color: white;
+}
+
+.hoverZoom:hover {
+  transform: scale(1.3);
+  transition: 0.7s;
+}
+
+.background-footer {
+  background-color: #25a18e;
+}
+
+.style-final-footer {
+  background-color: black;
+  color: white;
+}

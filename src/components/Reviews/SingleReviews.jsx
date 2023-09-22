@@ -1,5 +1,7 @@
 import React from "react";
 import { Card } from "react-bootstrap";
+import { AiTwotoneStar } from "react-icons/ai";
+import "../../Style/singleReviews.css";
 
 const SingleReviews = (reviews) => {
   const review = reviews.reviews;
@@ -9,7 +11,10 @@ const SingleReviews = (reviews) => {
         <Card.Title>{review && review.userName}</Card.Title>
         <Card.Text>{review && review.content}</Card.Text>
       </Card.Body>
-      <Card.Footer>{review && review.rating}</Card.Footer>
+      <Card.Footer className=" d-flex align-items-center gap-1">
+        <AiTwotoneStar className="fs-5 color-starIcon" /> (
+        {review && review.rating})
+      </Card.Footer>
     </Card>
   );
 };
