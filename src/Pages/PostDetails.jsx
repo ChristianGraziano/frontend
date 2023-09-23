@@ -15,6 +15,7 @@ import { FaCity } from "react-icons/fa";
 import "../Style/postDetails.css";
 import { AiOutlineCalendar } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import Footer from "../components/Footer";
 
 const PostDetails = () => {
   const dispatch = useDispatch();
@@ -168,6 +169,7 @@ const PostDetails = () => {
       ) : (
         <SpinnerLoading />
       )}
+      <Footer />
     </>
   );
 };

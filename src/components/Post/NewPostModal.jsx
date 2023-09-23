@@ -7,7 +7,6 @@ import {
   postAdoptionPosts,
   postByAssociationId,
 } from "../../reducer/postSlice";
-import { toast } from "react-toastify";
 
 const NewPostModal = () => {
   const dispatch = useDispatch();

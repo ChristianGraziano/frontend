@@ -65,6 +65,18 @@ const associationSlice = createSlice({
 
       .addCase(associationById.rejected, (state, action) => {
         state.status = "error";
+      })
+      //Chiamata PER CAMBIARE IL LOGO
+      .addCase(associationChangeLogo.fulfilled, (state, action) => {
+        state.singleAssociation = action.payload;
+        state.associationsArray = action.payload;
+      })
+      .addCase(associationChangeLogo.pending, (state, action) => {
+        state.status = "loading";
+      })
+
+      .addCase(associationChangeLogo.rejected, (state, action) => {
+        state.status = "error";
       });
   },
 });
@@ -145,5 +157,42 @@ export const associationById = createAsyncThunk(
   }
 );
 
+export const associationChangeLogo = createAsyncThunk(
+  "associations/changeLogo",
+  async ({ id, logo }) => {
+    const form = new FormData();
+    form.append("logo", logo);
+
+    try {
+      const res = await axios.patch(
+        `${endpoint}/associations/changeLogo/${id}`,
+        form,
+        {
+          // headers: { "Content-Type": "multipart/form-data" },
+        }
+      );
+      return res.data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+//Chiamata PATCH per modificare un associazione
+export const patchAdoptionPost = createAsyncThunk(
+  "associations/PATCH",
+  async ({ associationId, dataToUpdate }) => {
+    try {
+      const res = await axios.patch(
+        `${endpoint}/associations/change/${associationId}`,
+        dataToUpdate
+      );
+      return res.data;
+      console.log(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
 export const { filterAssociation } = associationSlice.actions;
 export default associationSlice.reducer;

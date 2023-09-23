@@ -62,7 +62,16 @@ const PostBoard = () => {
         <Row>
           {postsArray &&
             postsArray.post?.map((post) => {
-              return <SinglePost key={nanoid()} post={post} />;
+              return (
+                <SinglePost
+                  key={nanoid()}
+                  post={post}
+                  lg={3}
+                  md={4}
+                  sm={12}
+                  xs={12}
+                />
+              );
             })}
         </Row>
         <ResponsivePagination

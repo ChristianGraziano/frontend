@@ -17,6 +17,8 @@ import {
 } from "../reducer/reviewsSlice";
 import SingleReviews from "../components/Reviews/SingleReviews";
 import "../Style/dashboard.css";
+import ChangeImageAssociation from "../components/Association/ChangeImageAssociation";
+import Footer from "../components/Footer";
 
 const DashBoard = () => {
   const session = useSession();
@@ -41,6 +43,7 @@ const DashBoard = () => {
           <Col lg={6} md={6} sm={12} xs={12} className="mb-3">
             <Card className="w-100 shadow">
               <Card.Img variant="top" className="p-5" src={session.logo} />
+              <ChangeImageAssociation />
               <Card.Body className="text-center">
                 <Card.Title className="fs-2 fw-bold">{session.name}</Card.Title>
                 <Card.Text className="my-3">{session.description}</Card.Text>
@@ -56,11 +59,11 @@ const DashBoard = () => {
                 </Card.Text>
               </Card.Body>
             </Card>
-            <div className="text-center fs-3 fst-italic mt-5 mb-2 custom-scroll-reviews">
+            <div className="text-center fs-3 fst-italic mt-5 mb-2 ">
               Reviews
             </div>
             {reviewsAssociation ? (
-              <section>
+              <section className="custom-scroll-reviews">
                 {reviewsAssociation &&
                   reviewsAssociation.reviewsAssociation?.map((reviews) => (
                     <SingleReviews reviews={reviews} key={nanoid()} />
@@ -85,6 +88,7 @@ const DashBoard = () => {
           </Col>
         </Row>
       </Container>
+      <Footer />
     </>
   );
 };

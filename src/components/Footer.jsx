@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <>
-      <Container fluid className="background-footer py-5">
+      <Container fluid className="background-footer py-5 mt-5">
         <Row>
           <Col
             lg={6}

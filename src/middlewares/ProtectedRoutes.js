@@ -14,11 +14,11 @@ export const useSession = () => {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
+  /*   useEffect(() => {
     if (!session) {
       navigate("/", { replace: true });
     }
-  }, [navigate, session]);
+  }, [navigate, session]); */
   return decodedSession;
 };
 
