@@ -22,8 +22,9 @@ const SinglePostDashboard = ({ post }) => {
 
   const handleDelete = async () => {
     try {
-      await dispatch(deleteAdoptionPost(post._id));
-      dispatch(postByAssociationId(session.id));
+      dispatch(deleteAdoptionPost(post._id)).then(() =>
+        dispatch(postByAssociationId(session.id))
+      );
 
       toast.success("Post Eliminato Correttamente!", {
         position: "top-center",

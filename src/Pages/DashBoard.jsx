@@ -19,6 +19,7 @@ import SingleReviews from "../components/Reviews/SingleReviews";
 import "../Style/dashboard.css";
 import ChangeImageAssociation from "../components/Association/ChangeImageAssociation";
 import Footer from "../components/Footer";
+import ModifyAssociationModal from "../components/Association/ModifyAssociationModal";
 
 const DashBoard = () => {
   const session = useSession();
@@ -42,8 +43,13 @@ const DashBoard = () => {
         <Row>
           <Col lg={6} md={6} sm={12} xs={12} className="mb-3">
             <Card className="w-100 shadow">
-              <Card.Img variant="top" className="p-5" src={session.logo} />
-              <ChangeImageAssociation />
+              <div className="div-logo-dashboard">
+                <Card.Img variant="top" className="p-5 " src={session.logo} />
+                <div className="change-icon-absolute">
+                  <ChangeImageAssociation />
+                </div>
+              </div>
+
               <Card.Body className="text-center">
                 <Card.Title className="fs-2 fw-bold">{session.name}</Card.Title>
                 <Card.Text className="my-3">{session.description}</Card.Text>
@@ -57,6 +63,7 @@ const DashBoard = () => {
                   <AiOutlineMail className="fs-3" />
                   {session.email}
                 </Card.Text>
+                <ModifyAssociationModal />
               </Card.Body>
             </Card>
             <div className="text-center fs-3 fst-italic mt-5 mb-2 ">

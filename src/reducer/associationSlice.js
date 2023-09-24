@@ -77,6 +77,17 @@ const associationSlice = createSlice({
 
       .addCase(associationChangeLogo.rejected, (state, action) => {
         state.status = "error";
+      })
+      .addCase(patchAssociation.fulfilled, (state, action) => {
+        state.singleAssociation = action.payload;
+        state.associationsArray = action.payload;
+      })
+      .addCase(patchAssociation.pending, (state, action) => {
+        state.status = "loading";
+      })
+
+      .addCase(patchAssociation.rejected, (state, action) => {
+        state.status = "error";
       });
   },
 });
@@ -179,7 +190,7 @@ export const associationChangeLogo = createAsyncThunk(
 );
 
 //Chiamata PATCH per modificare un associazione
-export const patchAdoptionPost = createAsyncThunk(
+export const patchAssociation = createAsyncThunk(
   "associations/PATCH",
   async ({ associationId, dataToUpdate }) => {
     try {
@@ -187,8 +198,8 @@ export const patchAdoptionPost = createAsyncThunk(
         `${endpoint}/associations/change/${associationId}`,
         dataToUpdate
       );
-      return res.data;
-      console.log(res.data);
+      console.log(res.data.associations);
+      return res.data.associations;
     } catch (error) {
       console.log(error);
     }

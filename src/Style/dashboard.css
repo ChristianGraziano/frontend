@@ -7,3 +7,13 @@
   max-height: 50vh;
   overflow-y: auto;
 }
+
+.div-logo-dashboard {
+  position: relative;
+}
+
+.change-icon-absolute {
+  position: absolute;
+  top: 5%;
+  right: 15%;
+}

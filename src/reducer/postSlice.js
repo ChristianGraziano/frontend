@@ -50,6 +50,7 @@ const postSlice = createSlice({
         state.postsArray = state.postsArray.filter(
           (post) => post._id !== action.payload
         );
+        console.log(state.postsArray);
       })
       //Chiamata per cercare un post ID
       .addCase(adoptionPostById.fulfilled, (state, action) => {

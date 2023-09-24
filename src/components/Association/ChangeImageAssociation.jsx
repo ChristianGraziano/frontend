@@ -3,6 +3,9 @@ import { Modal, Button, Form } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { associationChangeLogo } from "../../reducer/associationSlice";
 import { useSession } from "../../middlewares/ProtectedRoutes";
+import { toast } from "react-toastify";
+import "../../Style/changeLogo.css";
+import { MdChangeCircle } from "react-icons/md";
 
 const ChangeImageAssociation = () => {
   const dispatch = useDispatch();
@@ -17,15 +20,31 @@ const ChangeImageAssociation = () => {
 
   const handleLogoUpload = () => {
     // Chiamata per cambiare il logo
-    dispatch(associationChangeLogo({ id: session.id, logo: selectedLogo }));
-    setShowModal(false);
+    try {
+      dispatch(associationChangeLogo({ id: session.id, logo: selectedLogo }));
+      setShowModal(false);
+      toast.success(
+        "Logo cambiato con successo, esci ed effettua di nuovo il login per confermare la modifica ",
+        {
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        }
+      );
+    } catch (error) {}
   };
 
   return (
     <div>
-      <Button variant="primary" onClick={() => setShowModal(true)}>
-        Change Logo
-      </Button>
+      <MdChangeCircle
+        className="fs-2 icon-change"
+        onClick={() => setShowModal(true)}
+      />
 
       <Modal show={showModal} onHide={() => setShowModal(false)}>
         <Modal.Header closeButton>
