@@ -6,6 +6,7 @@ import { useSession } from "../../middlewares/ProtectedRoutes";
 import { toast } from "react-toastify";
 import "../../Style/changeLogo.css";
 import { MdChangeCircle } from "react-icons/md";
+import { associationById } from "../../reducer/associationSlice";
 
 const ChangeImageAssociation = () => {
   const dispatch = useDispatch();
@@ -21,7 +22,9 @@ const ChangeImageAssociation = () => {
   const handleLogoUpload = () => {
     // Chiamata per cambiare il logo
     try {
-      dispatch(associationChangeLogo({ id: session.id, logo: selectedLogo }));
+      dispatch(
+        associationChangeLogo({ id: session.id, logo: selectedLogo })
+      ).then(dispatch(associationById(session.id)));
       setShowModal(false);
       toast.success(
         "Logo cambiato con successo, esci ed effettua di nuovo il login per confermare la modifica ",
@@ -36,6 +39,7 @@ const ChangeImageAssociation = () => {
           theme: "dark",
         }
       );
+      window.location.reload();
     } catch (error) {}
   };
 

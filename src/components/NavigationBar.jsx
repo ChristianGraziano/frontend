@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 import { useSession } from "../middlewares/ProtectedRoutes";
 import { Dropdown } from "react-bootstrap";
 import LogoutModal from "./LogoutModal";
+import RequestShowButton from "../components/RequestShowButton";
 
 const NavigationBar = () => {
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ const NavigationBar = () => {
   };
 
   const session = useSession();
-  console.log(session);
+
   return (
     <Navbar expand="lg" className="bg-navbar" sticky="top">
       <Container>
@@ -51,6 +52,7 @@ const NavigationBar = () => {
 
           {session ? (
             <div className="d-flex align-items-center">
+              <RequestShowButton />
               <span className="fw-bold">{session.name}</span>
 
               <Dropdown>

@@ -7,6 +7,7 @@ import ProtectedRoutes from "./middlewares/ProtectedRoutes";
 import DashBoard from "./Pages/DashBoard";
 import PostDetails from "./Pages/PostDetails";
 import ProfileAssociation from "./Pages/ProfileAssociation";
+import RequestAdoptioPage from "./Pages/RequestAdoptioPage";
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
           path="/profileAssociation/:associationId"
           element={<ProfileAssociation />}
         />
+        <Route path="/requestAdoptionPage" element={<RequestAdoptioPage />} />
 
         <Route element={<ProtectedRoutes />}>
           <Route path="/dashboard" element={<DashBoard />} />

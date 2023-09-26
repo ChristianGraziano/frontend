@@ -6,6 +6,8 @@
   width: 10rem;
 }
 
-.fixed-position {
-  position: fixed;
+@media (min-width: 768px) {
+  .fixed-position {
+    position: fixed;
+  }
 }

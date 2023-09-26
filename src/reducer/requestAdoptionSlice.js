@@ -25,6 +25,16 @@ const requestAdoptionSlice = createSlice({
       })
       .addCase(createRequest.rejected, (state) => {
         state.status = "error";
+      })
+      .addCase(fetchRequestByAssociation.fulfilled, (state, action) => {
+        state.requestArrayByAssociation = action.payload;
+        state.status = "idle";
+      })
+      .addCase(fetchRequestByAssociation.pending, (state) => {
+        state.status = "pending";
+      })
+      .addCase(fetchRequestByAssociation.rejected, (state) => {
+        state.status = "error";
       });
   },
 });
@@ -56,6 +66,22 @@ export const createRequest = createAsyncThunk(
       );
       console.log(res.data);
       return res.data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+//Chiamata GET per avere le richieste di adozione del relativo association ID
+export const fetchRequestByAssociation = createAsyncThunk(
+  "requestAdoptionById/GET",
+  async (associationId) => {
+    try {
+      const res = await axios.get(
+        `${endpoint}/requestAdoption/association/${associationId}`
+      );
+      return res.data;
+      console.log(res.data);
     } catch (error) {
       console.log(error);
     }

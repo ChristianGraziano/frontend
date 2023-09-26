@@ -6,6 +6,7 @@ import { patchAssociation } from "../../reducer/associationSlice";
 import { useSession } from "../../middlewares/ProtectedRoutes";
 import { toast } from "react-toastify";
 import { LuPencil } from "react-icons/lu";
+import { associationById } from "../../reducer/associationSlice";
 
 const ModifyAssociationModal = () => {
   const session = useSession();
@@ -33,9 +34,9 @@ const ModifyAssociationModal = () => {
       description: description.current.value,
     };
     try {
-      dispatch(
-        patchAssociation({ associationId: associationId, dataToUpdate })
-      ).then(handleClose());
+      dispatch(patchAssociation({ associationId: associationId, dataToUpdate }))
+        .then(handleClose())
+        .then(dispatch(associationById(session.id)));
       toast.success(
         "Modifica avvenuta con successo, rieffettuare il login per confermare le modifiche👌",
         {
@@ -49,6 +50,7 @@ const ModifyAssociationModal = () => {
           theme: "dark",
         }
       );
+      window.location.reload();
     } catch (error) {
       console.log(error);
       toast.error("❌ Qualcosa e andato storto!", {

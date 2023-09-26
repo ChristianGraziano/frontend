@@ -5,7 +5,7 @@ import { postByAssociationId } from "../reducer/postSlice";
 import { nanoid } from "@reduxjs/toolkit";
 import SpinnerLoading from "../components/SpinnerLoading";
 import NavigationBar from "../components/NavigationBar";
-import { Container, Row, Col, Button, Card } from "react-bootstrap";
+import { Container, Row, Col, Button, Card, Accordion } from "react-bootstrap";
 import { useSession } from "../middlewares/ProtectedRoutes";
 import { AiOutlineHome } from "react-icons/ai";
 import { AiOutlineMail } from "react-icons/ai";
@@ -20,6 +20,7 @@ import "../Style/dashboard.css";
 import ChangeImageAssociation from "../components/Association/ChangeImageAssociation";
 import Footer from "../components/Footer";
 import ModifyAssociationModal from "../components/Association/ModifyAssociationModal";
+import { associationById } from "../reducer/associationSlice";
 
 const DashBoard = () => {
   const session = useSession();
@@ -28,10 +29,13 @@ const DashBoard = () => {
   const ArrayPostById = useSelector(
     (state) => state.adoptionPosts.postByIdAssociation
   );
+  const { singleAssociation } = useSelector((state) => state.associations);
+
   const reviewsAssociation = useSelector(associationsReviews);
   console.log(reviewsAssociation);
 
   useEffect(() => {
+    dispatch(associationById(session.id));
     dispatch(postByAssociationId(session.id));
     dispatch(fetchReviewsByAssociation(session.id));
   }, [dispatch, session.id]);
@@ -42,45 +46,65 @@ const DashBoard = () => {
       <Container className="my-5">
         <Row>
           <Col lg={6} md={6} sm={12} xs={12} className="mb-3">
-            <Card className="w-100 shadow">
-              <div className="div-logo-dashboard">
-                <Card.Img variant="top" className="p-5 " src={session.logo} />
-                <div className="change-icon-absolute">
-                  <ChangeImageAssociation />
+            {singleAssociation.associationById ? (
+              <Card className="w-100 shadow">
+                <div className="div-logo-dashboard">
+                  <Card.Img
+                    variant="top"
+                    className="p-5 "
+                    src={singleAssociation.associationById.logo}
+                  />
+                  <div className="change-icon-absolute">
+                    <ChangeImageAssociation />
+                  </div>
                 </div>
-              </div>
 
-              <Card.Body className="text-center">
-                <Card.Title className="fs-2 fw-bold">{session.name}</Card.Title>
-                <Card.Text className="my-3">{session.description}</Card.Text>
-                <hr />
-                <Card.Text className="d-flex align-items-center justify-content-center gap-2">
-                  <AiOutlineHome className="fs-3" />
-                  {session.region}
-                </Card.Text>
-                <Card.Text className="text-center">{session.address}</Card.Text>
-                <Card.Text className="d-flex align-items-center justify-content-center gap-2">
-                  <AiOutlineMail className="fs-3" />
-                  {session.email}
-                </Card.Text>
-                <ModifyAssociationModal />
-              </Card.Body>
-            </Card>
-            <div className="text-center fs-3 fst-italic mt-5 mb-2 ">
-              Reviews
-            </div>
-            {reviewsAssociation ? (
-              <section className="custom-scroll-reviews">
-                {reviewsAssociation &&
-                  reviewsAssociation.reviewsAssociation?.map((reviews) => (
-                    <SingleReviews reviews={reviews} key={nanoid()} />
-                  ))}
-              </section>
+                <Card.Body className="text-center">
+                  <Card.Title className="fs-2 fw-bold">
+                    {session.name}
+                  </Card.Title>
+                  <Card.Text className="my-3">
+                    {singleAssociation.associationById.description}
+                  </Card.Text>
+                  <hr />
+                  <Card.Text className="d-flex align-items-center justify-content-center gap-2">
+                    <AiOutlineHome className="fs-3" />
+                    {singleAssociation.associationById.region}
+                  </Card.Text>
+                  <Card.Text className="text-center">
+                    {singleAssociation.associationById.address}
+                  </Card.Text>
+                  <Card.Text className="d-flex align-items-center justify-content-center gap-2">
+                    <AiOutlineMail className="fs-3" />
+                    {singleAssociation.associationById.email}
+                  </Card.Text>
+                  <ModifyAssociationModal />
+                </Card.Body>
+              </Card>
             ) : (
-              <div className="my-5 d-flex justify-content-center align-items-center">
-                <SpinnerLoading />
-              </div>
+              <SpinnerLoading />
             )}
+            <Accordion>
+              <Accordion.Item eventKey="0">
+                <Accordion.Header>Visualizza le recensioni</Accordion.Header>
+                <Accordion.Body>
+                  {reviewsAssociation ? (
+                    <section className="custom-scroll-reviews">
+                      {reviewsAssociation &&
+                        reviewsAssociation.reviewsAssociation?.map(
+                          (reviews) => (
+                            <SingleReviews reviews={reviews} key={nanoid()} />
+                          )
+                        )}
+                    </section>
+                  ) : (
+                    <div className="my-5 d-flex justify-content-center align-items-center">
+                      <SpinnerLoading />
+                    </div>
+                  )}
+                </Accordion.Body>
+              </Accordion.Item>
+            </Accordion>
           </Col>
 
           <Col lg={6} md={6} sm={12} xs={12}>
