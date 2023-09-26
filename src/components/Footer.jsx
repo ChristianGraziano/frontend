@@ -15,13 +15,13 @@ const Footer = () => {
           <Col
             lg={6}
             md={4}
-            sm={12}
-            xs={12}
+            sm={6}
+            xs={6}
             className="d-flex justify-content-center"
           >
             <img src={LogoGrande} className="logo-footer" alt="" />
           </Col>
-          <Col lg={3} md={4} sm={12} xs={12}>
+          <Col lg={3} md={4} sm={6} xs={6}>
             <ul className="ul-style text-center fw-bold">
               <li>Chi Siamo</li>
               <li>Cerca Pet</li>

@@ -2,7 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { nanoid } from "nanoid";
 import { useDispatch, useSelector } from "react-redux";
-import { getAdoptionPost, filterPosts } from "../../reducer/postSlice";
+import {
+  getAdoptionPost,
+  getAdoptionPostByRegion,
+} from "../../reducer/postSlice";
 import { LiaSearchLocationSolid } from "react-icons/lia";
 import SinglePost from "./SinglePost";
 import ResponsivePagination from "react-responsive-pagination";
@@ -10,6 +13,7 @@ import "react-responsive-pagination/themes/classic.css";
 
 const PostBoard = () => {
   const [searchTerm, setSearchTerm] = useState("");
+
   const dispatch = useDispatch();
   const { postsArray } = useSelector((state) => state.adoptionPosts);
   console.log("PAGINATION", postsArray);
@@ -29,19 +33,19 @@ const PostBoard = () => {
     setSearchTerm(value);
   };
 
-  const filteredResult = (e) => {
+  const handleSearchSubmit = (e) => {
     e.preventDefault();
-    dispatch(filterPosts(searchTerm));
+    dispatch(getAdoptionPostByRegion(searchTerm));
   };
 
   useEffect(() => {
     dispatch(getAdoptionPost({ page: actualPage, pageSize: 8 }));
-  }, [actualPage]);
+  }, [actualPage, dispatch]);
 
   return (
     <>
       <Container>
-        <Form className="d-flex" onSubmit={filteredResult}>
+        <Form className="d-flex" onSubmit={handleSearchSubmit}>
           <Form.Control
             type="search"
             placeholder="Search region.."
@@ -50,7 +54,7 @@ const PostBoard = () => {
             onChange={handleSearch}
           />
           <Button
-            onClick={filteredResult}
+            type="submit"
             variant="outline-dark"
             className="rounded-pill p-3"
           >

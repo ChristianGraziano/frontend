@@ -22,7 +22,6 @@ const NewReviewsModal = () => {
   const handleShow = () => setShow(true);
 
   const userName = useRef(null);
-
   const content = useRef(null);
   const rating = useRef(null);
 

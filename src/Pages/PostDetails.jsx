@@ -16,6 +16,7 @@ import "../Style/postDetails.css";
 import { AiOutlineCalendar } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
+import RequestAdoptionModal from "../components/RequestAdoptionModal";
 
 const PostDetails = () => {
   const dispatch = useDispatch();
@@ -155,12 +156,7 @@ const PostDetails = () => {
                   da volontario referente
                 </Card.Text>
                 <div className="m-3">
-                  <Button
-                    variant="outline-warning"
-                    className="w-100 fw-bold fs-5 "
-                  >
-                    Invia la tua richiesta
-                  </Button>
+                  <RequestAdoptionModal />
                 </div>{" "}
               </Card>
             </Col>

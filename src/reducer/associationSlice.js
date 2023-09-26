@@ -195,7 +195,7 @@ export const patchAssociation = createAsyncThunk(
   async ({ associationId, dataToUpdate }) => {
     try {
       const res = await axios.patch(
-        `${endpoint}/associations/change/${associationId}`,
+        `${endpoint}/associations/${associationId}`,
         dataToUpdate
       );
       console.log(res.data.associations);

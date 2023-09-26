@@ -9,6 +9,7 @@ const initialState = {
   status: "idle",
   singlePost: {},
   postByIdAssociation: [],
+  filteredPostsArray: [], // Aggiunto campo per i post filtrati
 };
 
 const postSlice = createSlice({
@@ -16,11 +17,20 @@ const postSlice = createSlice({
   initialState,
   reducers: {
     filterPosts: (state, action) => {
-      state.postsArray = state.postsArray.filter((post) => {
+      state.postsArray = state.postsArray.post.filter((post) => {
         return post.location
           .toLowerCase()
           .includes(action.payload.toLowerCase());
       });
+    },
+    filterPostsByRegion: (state, action) => {
+      state.filteredPostsArray =
+        state.postsArray.post &&
+        state.postsArray.post.filter((post) => {
+          return post.location
+            .toLowerCase()
+            .includes(action.payload.toLowerCase());
+        });
     },
   },
   extraReducers: (builder) => {
@@ -84,6 +94,9 @@ const postSlice = createSlice({
 
       .addCase(patchAdoptionPost.rejected, (state, action) => {
         state.status = "error";
+      })
+      .addCase(getAdoptionPostByRegion.fulfilled, (state, action) => {
+        state.postsArray = action.payload;
       });
   },
 });
@@ -136,6 +149,24 @@ export const getAdoptionPost = createAsyncThunk(
         console.log(`HTTP error! status: ${res.status}`);
       }
       console.log(res.data);
+      return res.data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+export const getAdoptionPostByRegion = createAsyncThunk(
+  "adoptionPostForRegion/GET",
+  async (region) => {
+    try {
+      const res = await axios.get(
+        `${endpoint}/posts/filterRegion?region=${region}`
+      );
+      if (!res) {
+        console.log(`HTTP error! status: ${res.status}`);
+      }
+      console.log("FILTER REGION", res.data);
       return res.data;
     } catch (error) {
       console.log(error);
@@ -206,6 +237,20 @@ export const patchAdoptionPost = createAsyncThunk(
     }
   }
 );
+
+export const filterPostsByRegion = (region) => (dispatch, getState) => {
+  const postsArray = getState().adoptionPosts.postsArray.post;
+
+  // Filtra i post
+  const filteredPosts = postsArray.filter((post) => {
+    const postLocation =
+      post.location && typeof post.location === "string" ? post.location : "";
+    return postLocation.toLowerCase().includes(region.toLowerCase());
+  });
+
+  // Aggiorna lo stato con i post filtrati
+  dispatch(postSlice.actions.filterPosts(filteredPosts));
+};
 
 export const { filterPosts } = postSlice.actions;
 export default postSlice.reducer;
