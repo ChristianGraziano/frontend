@@ -134,7 +134,9 @@ const ProfileAssociation = () => {
       ) : (
         <SpinnerLoading />
       )}
-      <Maps />
+      {/* <Container>
+        <Maps />
+      </Container> */}
       <Footer />
     </>
   );

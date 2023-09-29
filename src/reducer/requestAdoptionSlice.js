@@ -16,6 +16,7 @@ const requestAdoptionSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+      //POST PER AGGIUNGERE REQUEST
       .addCase(createRequest.fulfilled, (state, action) => {
         state.requestArray = action.payload;
         state.status = "idle";
@@ -26,6 +27,7 @@ const requestAdoptionSlice = createSlice({
       .addCase(createRequest.rejected, (state) => {
         state.status = "error";
       })
+      // GET BY ASSOCIATION ID PER AVERE REQUEST DI ASSOCIAZIONI
       .addCase(fetchRequestByAssociation.fulfilled, (state, action) => {
         state.requestArrayByAssociation = action.payload;
         state.status = "idle";
@@ -35,6 +37,13 @@ const requestAdoptionSlice = createSlice({
       })
       .addCase(fetchRequestByAssociation.rejected, (state) => {
         state.status = "error";
+      })
+      //DELETE PER CANCELLARE REQUEST
+      .addCase(deleteRequestAdoption.fulfilled, (state, action) => {
+        state.requestArray = state.requestArray.filter(
+          (request) => request._id !== action.payload
+        );
+        console.log(state.requestArray);
       });
   },
 });
@@ -82,6 +91,20 @@ export const fetchRequestByAssociation = createAsyncThunk(
       );
       return res.data;
       console.log(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+export const deleteRequestAdoption = createAsyncThunk(
+  "requestAdoption/Delete",
+  async (requestId) => {
+    try {
+      const res = await axios.delete(
+        `${endpoint}/requestAdoption/${requestId}`
+      );
+      return res.data;
     } catch (error) {
       console.log(error);
     }
