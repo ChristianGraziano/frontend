@@ -19,6 +19,7 @@ import SingleReviews from "../components/Reviews/SingleReviews";
 import "../Style/profileAssociation.css";
 import Footer from "../components/Footer";
 import NewReviewsModal from "../components/Reviews/NewReviewsModal";
+import Maps from "../components/Maps";
 
 const ProfileAssociation = () => {
   const dispatch = useDispatch();
@@ -133,6 +134,7 @@ const ProfileAssociation = () => {
       ) : (
         <SpinnerLoading />
       )}
+      <Maps />
       <Footer />
     </>
   );

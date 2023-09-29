@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useState, useRef } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { patchAssociation } from "../../reducer/associationSlice";
 import { useSession } from "../../middlewares/ProtectedRoutes";
 import { toast } from "react-toastify";
@@ -11,6 +11,9 @@ import { associationById } from "../../reducer/associationSlice";
 const ModifyAssociationModal = () => {
   const session = useSession();
   const dispatch = useDispatch();
+
+  const { singleAssociation } = useSelector((state) => state.associations);
+  console.log("SINGLE ASSOCIATION PER PATCH", singleAssociation);
 
   const [show, setShow] = useState(false);
 
@@ -23,7 +26,7 @@ const ModifyAssociationModal = () => {
   const email = useRef(null);
   const description = useRef(null);
 
-  const handleUpdate = () => {
+  const handleUpdate = async () => {
     const associationId = session.id;
     console.log(associationId);
     const dataToUpdate = {
@@ -34,9 +37,10 @@ const ModifyAssociationModal = () => {
       description: description.current.value,
     };
     try {
-      dispatch(patchAssociation({ associationId: associationId, dataToUpdate }))
-        .then(handleClose())
-        .then(dispatch(associationById(session.id)));
+      dispatch(
+        patchAssociation({ associationId: associationId, dataToUpdate })
+      ).then(handleClose());
+
       toast.success(
         "Modifica avvenuta con successo, rieffettuare il login per confermare le modifiche👌",
         {
@@ -50,7 +54,6 @@ const ModifyAssociationModal = () => {
           theme: "dark",
         }
       );
-      window.location.reload();
     } catch (error) {
       console.log(error);
       toast.error("❌ Qualcosa e andato storto!", {
@@ -65,6 +68,12 @@ const ModifyAssociationModal = () => {
       });
     }
   };
+
+  useEffect(() => {
+    if (singleAssociation.associationById) {
+      dispatch(associationById(session.id));
+    }
+  }, [dispatch, session.id]);
   return (
     <>
       <Button variant="warning" onClick={handleShow} className="my-3">

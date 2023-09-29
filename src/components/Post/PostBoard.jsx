@@ -10,6 +10,7 @@ import { LiaSearchLocationSolid } from "react-icons/lia";
 import SinglePost from "./SinglePost";
 import ResponsivePagination from "react-responsive-pagination";
 import "react-responsive-pagination/themes/classic.css";
+import "../../Style/postBoard.css";
 
 const PostBoard = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -49,7 +50,7 @@ const PostBoard = () => {
           <Form.Control
             type="search"
             placeholder="Search region.."
-            className="me-2 rounded-pill shadow fs-4 p-2"
+            className="me-2 styleSearchBar-home shadow fs-4 p-2"
             aria-label="Search"
             onChange={handleSearch}
           />

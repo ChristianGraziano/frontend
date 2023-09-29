@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const endpoint = "http://localhost:5050";
+const endpoint = process.env.REACT_APP_SERVER_BASE_URL;
 
 const initialState = {
   reviewsArray: [],

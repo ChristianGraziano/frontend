@@ -25,7 +25,10 @@ const RequestAdoptioPage = () => {
   return (
     <>
       <NavigationBar />
-      <Container>
+      <div className="d-flex justify-content-center mt-5">
+        <h2 className="fs-2 fw-bold fst-italic">Richieste di Adozione </h2>
+      </div>
+      <Container className="my-5">
         <Row>
           {requestById && requestById.length !== 0 ? (
             requestById.map((request) => {

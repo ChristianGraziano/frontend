@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const endpoint = "http://localhost:5050";
+const endpoint = process.env.REACT_APP_SERVER_BASE_URL;
 console.log(endpoint);
 
 const initialState = {
@@ -40,7 +40,7 @@ const associationSlice = createSlice({
 
       //Chiamata GET
       .addCase(getAssociations.fulfilled, (state, action) => {
-        state.assocaitionsArray = action.payload;
+        state.associationsArray = action.payload;
       })
       .addCase(getAssociations.rejected, (state, action) => {
         state.status = "error";
@@ -128,8 +128,8 @@ export const getAssociations = createAsyncThunk(
       if (!res) {
         console.log(`HTTP error! status: ${res.status}`);
       }
-      console.log(res.data.users);
-      return res.data.users;
+      console.log("LOG GET ASSOCIATION SLICE", res.data);
+      return res.data;
     } catch (error) {
       console.log(error);
       throw error;
@@ -153,7 +153,7 @@ export const deleteAssociation = createAsyncThunk(
 );
 
 export const associationById = createAsyncThunk(
-  "association/getById",
+  "associationbyId/getById",
   async (id) => {
     try {
       const res = await axios.get(`${endpoint}/associations/` + id);
