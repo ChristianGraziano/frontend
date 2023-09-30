@@ -11,6 +11,7 @@ import SinglePost from "./SinglePost";
 import ResponsivePagination from "react-responsive-pagination";
 import "react-responsive-pagination/themes/classic.css";
 import "../../Style/postBoard.css";
+import SpinnerLoading from "../SpinnerLoading";
 
 const PostBoard = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -65,8 +66,8 @@ const PostBoard = () => {
       </Container>
       <Container className="my-5 pt-5">
         <Row>
-          {postsArray &&
-            postsArray.post?.map((post) => {
+          {postsArray.post ? (
+            postsArray.post.map((post) => {
               return (
                 <SinglePost
                   key={nanoid()}
@@ -77,7 +78,12 @@ const PostBoard = () => {
                   xs={12}
                 />
               );
-            })}
+            })
+          ) : (
+            <div className="my-5 d-flex justify-content-center align-items-center">
+              <SpinnerLoading />
+            </div>
+          )}
         </Row>
         <ResponsivePagination
           current={actualPage}

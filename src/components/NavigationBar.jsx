@@ -38,7 +38,7 @@ const NavigationBar = () => {
             <Nav.Link onClick={redirectHomeOnClick}>Home</Nav.Link>
             <Nav.Link href="#action2">Cerca Pet</Nav.Link>
 
-            <Nav.Link href="#">Association</Nav.Link>
+            <Nav.Link href="#">Contatti</Nav.Link>
           </Nav>
 
           {session ? (
