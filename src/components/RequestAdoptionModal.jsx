@@ -46,7 +46,7 @@ const RequestAdoptionModal = () => {
     try {
       await dispatch(createRequest(requestPayload)).then(handleClose());
       toast.success(
-        "Recensione creata con successo!👍 sarai ricontattato a breve da un nostro volontario ",
+        "Richiesta di adozione creata con successo!👍 sarai ricontattato a breve da un nostro volontario ",
         {
           position: "top-center",
           autoClose: 2000,

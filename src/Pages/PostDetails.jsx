@@ -163,7 +163,9 @@ const PostDetails = () => {
           </Row>
         </Container>
       ) : (
-        <SpinnerLoading />
+        <div className="my-5 d-flex justify-content-center align-items-center">
+          <SpinnerLoading />
+        </div>
       )}
       <Footer />
     </>
