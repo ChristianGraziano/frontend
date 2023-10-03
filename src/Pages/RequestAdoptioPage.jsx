@@ -35,7 +35,9 @@ const RequestAdoptioPage = () => {
               return <SingleRequest key={nanoid()} request={request} />;
             })
           ) : (
-            <SpinnerLoading />
+            <div className="my-5 d-flex justify-content-center align-items-center">
+              <SpinnerLoading />
+            </div>
           )}
         </Row>
       </Container>
